@@ -1,0 +1,371 @@
+{
+  "version": "2.0",
+  "actualizado": "2026-08-23",
+  "notas": "Plan vigente tras revisión día a día con Sergio (5.º mes). Sustituye al plan inicial.",
+  "unidades": {
+    "b": "barras/placas de la máquina",
+    "kg": "kilogramos",
+    "PC": "peso corporal"
+  },
+  "dias": [
+    {
+      "dia": "Domingo",
+      "titulo": "Pecho + Tríceps",
+      "ejercicios": [
+        {
+          "nombre": "Press inclinado · máquina",
+          "objetivo": "4×8-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "pecho": 1,
+            "hombroAnterior": 0.5,
+            "triceps": 0.4
+          },
+          "objetivoProximo": "probar 42.5 kg"
+        },
+        {
+          "nombre": "Press declinado · máquina",
+          "objetivo": "3×8-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "pecho": 1,
+            "triceps": 0.5
+          }
+        },
+        {
+          "nombre": "Fondos",
+          "objetivo": "3×6-10",
+          "descansoSeg": 180,
+          "musculos": {
+            "pecho": 0.7,
+            "triceps": 1,
+            "hombroAnterior": 0.5
+          },
+          "pesoCorporal": true,
+          "progresaPor": "reps"
+        },
+        {
+          "nombre": "Peck deck",
+          "objetivo": "3×12-15",
+          "descansoSeg": 120,
+          "musculos": {
+            "pecho": 1,
+            "hombroAnterior": 0.2
+          }
+        },
+        {
+          "nombre": "Extensión de tríceps",
+          "objetivo": "3×10-12",
+          "descansoSeg": 120,
+          "musculos": {
+            "triceps": 1
+          },
+          "nota": "no soltar tensión en posición estirada (codo)"
+        }
+      ]
+    },
+    {
+      "dia": "Lunes",
+      "titulo": "Espalda + Bíceps",
+      "ejercicios": [
+        {
+          "nombre": "Dominadas",
+          "objetivo": "4×8-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "dorsal": 1,
+            "biceps": 0.6
+          },
+          "pesoCorporal": true,
+          "progresaPor": "reps",
+          "alternativas": [
+            "Jalón al pecho"
+          ],
+          "nota": "PRIMERO y fresco: es el día de especialización"
+        },
+        {
+          "nombre": "Remo en T",
+          "objetivo": "4×8-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "espalda": 1,
+            "dorsal": 0.7,
+            "biceps": 0.5,
+            "deltPosterior": 0.4
+          }
+        },
+        {
+          "nombre": "Remo en polea",
+          "objetivo": "4×10-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "espalda": 1,
+            "biceps": 0.5,
+            "deltPosterior": 0.4
+          }
+        },
+        {
+          "nombre": "Curl martillo",
+          "objetivo": "3×10-12",
+          "descansoSeg": 120,
+          "musculos": {
+            "biceps": 1,
+            "antebrazo": 0.6
+          },
+          "objetivoProximo": "bajar a 30 kg y recuperar 10-12 reps"
+        },
+        {
+          "nombre": "Curl en polea baja",
+          "objetivo": "4×10-12",
+          "descansoSeg": 120,
+          "musculos": {
+            "biceps": 1
+          },
+          "alternativas": [
+            "Curl con barra Z"
+          ]
+        }
+      ]
+    },
+    {
+      "dia": "Martes",
+      "titulo": "Pierna A · cuádriceps",
+      "intensidad": "liviano",
+      "nota": "Gimnasio lleno los martes: solo máquinas de estación única, sin barra ni rack.",
+      "ejercicios": [
+        {
+          "nombre": "Prensa",
+          "objetivo": "4×10-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "cuadriceps": 1,
+            "gluteo": 0.5
+          }
+        },
+        {
+          "nombre": "Extensión de cuádriceps unilateral",
+          "objetivo": "3×12-15",
+          "descansoSeg": 120,
+          "musculos": {
+            "cuadriceps": 1
+          },
+          "nota": "unilateral porque la máquina topa en 15 barras"
+        },
+        {
+          "nombre": "Talones en prensa",
+          "objetivo": "4×12-20",
+          "descansoSeg": 90,
+          "musculos": {
+            "gemelos": 1
+          },
+          "nota": "en la prensa: evita apoyar peso sobre los dedos (uña encarnada)"
+        }
+      ]
+    },
+    {
+      "dia": "Miércoles",
+      "titulo": "Pecho + Espalda",
+      "ejercicios": [
+        {
+          "nombre": "Press inclinado · máquina",
+          "objetivo": "4×8-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "pecho": 1,
+            "hombroAnterior": 0.5,
+            "triceps": 0.4
+          },
+          "objetivoProximo": "42.5 kg"
+        },
+        {
+          "nombre": "Remo en T",
+          "objetivo": "4×8-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "espalda": 1,
+            "dorsal": 0.7,
+            "biceps": 0.5,
+            "deltPosterior": 0.4
+          }
+        },
+        {
+          "nombre": "Jalón al pecho",
+          "objetivo": "4×10-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "dorsal": 1,
+            "biceps": 0.5
+          },
+          "finisher": "2 series de dominadas",
+          "alternativas": [
+            "Dominadas"
+          ]
+        },
+        {
+          "nombre": "Pullover en polea",
+          "objetivo": "3×10-12",
+          "descansoSeg": 120,
+          "musculos": {
+            "dorsal": 1,
+            "pecho": 0.4
+          }
+        },
+        {
+          "nombre": "Peck deck",
+          "objetivo": "3×12-15",
+          "descansoSeg": 120,
+          "musculos": {
+            "pecho": 1,
+            "hombroAnterior": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "dia": "Jueves",
+      "titulo": "Hombros + Brazos",
+      "ejercicios": [
+        {
+          "nombre": "Press de hombro · máquina",
+          "objetivo": "4×8-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "hombro": 1,
+            "triceps": 0.5
+          },
+          "nota": "consolidar 60 kg; reevaluar en 2 semanas"
+        },
+        {
+          "nombre": "Elevaciones laterales",
+          "objetivo": "4×8-12",
+          "descansoSeg": 120,
+          "musculos": {
+            "hombroLateral": 1
+          },
+          "nota": "placas de 5 kg: rango 8-12 en vez de 12-15; a 20 kg al lograr 12 limpias"
+        },
+        {
+          "nombre": "Peck deck invertido",
+          "objetivo": "3×12-15",
+          "descansoSeg": 120,
+          "musculos": {
+            "deltPosterior": 1,
+            "espaldaAlta": 0.5
+          },
+          "nuevo": true,
+          "nota": "corrige el desbalance frente/atrás del hombro"
+        },
+        {
+          "nombre": "Curl predicador",
+          "objetivo": "3×10-12",
+          "descansoSeg": 120,
+          "musculos": {
+            "biceps": 1
+          }
+        },
+        {
+          "nombre": "Extensión de tríceps",
+          "objetivo": "3×10-12",
+          "descansoSeg": 120,
+          "musculos": {
+            "triceps": 1
+          },
+          "nota": "sin soltar tensión abajo"
+        }
+      ]
+    },
+    {
+      "dia": "Viernes",
+      "titulo": "Descanso",
+      "ejercicios": []
+    },
+    {
+      "dia": "Sábado",
+      "titulo": "Pierna B",
+      "intensidad": "pesado",
+      "nota": "Día con tiempo libre: aquí van los compuestos pesados.",
+      "ejercicios": [
+        {
+          "nombre": "V-squat cadera",
+          "objetivo": "4×8-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "cuadriceps": 1,
+            "gluteo": 0.8,
+            "isquios": 0.5
+          },
+          "alternativas": [
+            "Sentadilla en barra Smith"
+          ],
+          "nota": "ALTERNAR semana a semana con la Smith: no ambos el mismo día"
+        },
+        {
+          "nombre": "Hip thrust",
+          "objetivo": "4×8-12",
+          "descansoSeg": 180,
+          "musculos": {
+            "gluteo": 1,
+            "isquios": 0.5
+          },
+          "nuevo": true
+        },
+        {
+          "nombre": "Curl femoral sentado",
+          "objetivo": "4×12-15",
+          "descansoSeg": 120,
+          "musculos": {
+            "isquios": 1
+          }
+        },
+        {
+          "nombre": "Hiperextensión a 45°",
+          "objetivo": "4×12-15",
+          "descansoSeg": 120,
+          "musculos": {
+            "isquios": 0.7,
+            "gluteo": 0.7,
+            "lumbar": 0.6
+          },
+          "pesoCorporal": true,
+          "progresaPor": "reps",
+          "nota": "SIEMPRE se hizo; faltaba en la app (bug)"
+        },
+        {
+          "nombre": "Abductores",
+          "objetivo": "4×12-15",
+          "descansoSeg": 120,
+          "musculos": {
+            "abductores": 1,
+            "gluteoMedio": 0.7
+          }
+        }
+      ]
+    }
+  ],
+  "archivados": [
+    {
+      "nombre": "V-squat rodilla",
+      "motivo": "redundante: terminaba siendo el mismo movimiento que el de cadera"
+    },
+    {
+      "nombre": "Cruce en polea",
+      "motivo": "reemplazado por peck deck (se sentía muy liviano)"
+    },
+    {
+      "nombre": "Jalón de tríceps · cuerda",
+      "motivo": "dolor de codo; reemplazado por fondos"
+    },
+    {
+      "nombre": "Press plano",
+      "motivo": "nunca existió: error de nombre, siempre fue press declinado"
+    },
+    {
+      "nombre": "Talones sentado",
+      "motivo": "nunca se hizo: no hay máquina. Migró a talones en prensa"
+    },
+    {
+      "nombre": "Sentadilla · máquina",
+      "motivo": "reemplazada por V-squat / Smith"
+    }
+  ]
+}
