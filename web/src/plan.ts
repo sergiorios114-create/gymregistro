@@ -7,9 +7,21 @@ import planJson from './plan.json';
 /** Grupos musculares con su peso de implicación (1 = primario, <1 = secundario). */
 export type Musculos = Record<string, number>;
 
+/** kg = kilos (paso 2,5) · barras = placas del stack (paso 1) · pc = peso corporal (solo reps). */
+export type Unidad = 'kg' | 'barras' | 'pc';
+
+/** Incremento del +/− según la unidad, igual que en la app anterior. */
+export function pasoDe(u: Unidad): number {
+  return u === 'kg' ? 2.5 : 1;
+}
+
+export const SUFIJO: Record<Unidad, string> = { kg: '', barras: 'b', pc: 'PC' };
+
 export interface EjercicioPlan {
   nombre: string;
   objetivo: string;
+  unidad: Unidad;
+  unidadAlternativas?: Record<string, Unidad>;
   /** Descanso sugerido entre series, en segundos. */
   descansoSeg: number;
   musculos: Musculos;

@@ -391,3 +391,86 @@ button:disabled {
   margin-top: 6px;
   font-weight: 500;
 }
+
+/* ---------- registro de cargas ---------- */
+.registro {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  background: var(--bg-elev);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.stepper button {
+  background: none;
+  border: none;
+  color: var(--texto);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 10px 14px;
+  border-radius: 0;
+  min-width: 44px;
+}
+
+.stepper button:active {
+  background: var(--borde);
+}
+
+.campo {
+  min-width: 62px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+.campo small {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--texto-2);
+  margin-left: 2px;
+}
+
+button.guardar {
+  flex: 1;
+  min-width: 74px;
+  background: var(--acento);
+  border-color: var(--acento);
+  color: #10240e;
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 11px 10px;
+}
+
+button.guardar.ok {
+  background: #4d7a48;
+  border-color: #4d7a48;
+  color: #eafbe8;
+}
+
+button.guardar.error {
+  background: var(--rojo);
+  border-color: var(--rojo);
+  color: #2a0f0f;
+}
+
+button.guardar.guardando {
+  opacity: 0.7;
+}
+
+.err-registro {
+  flex-basis: 100%;
+  font-size: 11.5px;
+  color: var(--rojo);
+  margin-top: 2px;
+}

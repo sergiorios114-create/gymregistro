@@ -1,11 +1,11 @@
 {
-  "version": "2.0",
+  "version": "2.1",
   "actualizado": "2026-08-23",
   "notas": "Plan vigente tras revisión día a día con Sergio (5.º mes). Sustituye al plan inicial.",
   "unidades": {
-    "b": "barras/placas de la máquina",
-    "kg": "kilogramos",
-    "PC": "peso corporal"
+    "kg": "kilogramos (paso 2,5)",
+    "barras": "placas del stack (paso 1)",
+    "pc": "peso corporal — progresa por reps"
   },
   "dias": [
     {
@@ -21,7 +21,8 @@
             "hombroAnterior": 0.5,
             "triceps": 0.4
           },
-          "objetivoProximo": "probar 42.5 kg"
+          "objetivoProximo": "probar 42.5 kg",
+          "unidad": "kg"
         },
         {
           "nombre": "Press declinado · máquina",
@@ -30,7 +31,8 @@
           "musculos": {
             "pecho": 1,
             "triceps": 0.5
-          }
+          },
+          "unidad": "kg"
         },
         {
           "nombre": "Fondos",
@@ -42,7 +44,8 @@
             "hombroAnterior": 0.5
           },
           "pesoCorporal": true,
-          "progresaPor": "reps"
+          "progresaPor": "reps",
+          "unidad": "pc"
         },
         {
           "nombre": "Peck deck",
@@ -51,7 +54,8 @@
           "musculos": {
             "pecho": 1,
             "hombroAnterior": 0.2
-          }
+          },
+          "unidad": "barras"
         },
         {
           "nombre": "Extensión de tríceps",
@@ -60,7 +64,8 @@
           "musculos": {
             "triceps": 1
           },
-          "nota": "no soltar tensión en posición estirada (codo)"
+          "nota": "no soltar tensión en posición estirada (codo)",
+          "unidad": "barras"
         }
       ]
     },
@@ -81,7 +86,11 @@
           "alternativas": [
             "Jalón al pecho"
           ],
-          "nota": "PRIMERO y fresco: es el día de especialización"
+          "nota": "PRIMERO y fresco: es el día de especialización",
+          "unidad": "pc",
+          "unidadAlternativas": {
+            "Jalón al pecho": "kg"
+          }
         },
         {
           "nombre": "Remo en T",
@@ -92,7 +101,8 @@
             "dorsal": 0.7,
             "biceps": 0.5,
             "deltPosterior": 0.4
-          }
+          },
+          "unidad": "kg"
         },
         {
           "nombre": "Remo en polea",
@@ -102,7 +112,8 @@
             "espalda": 1,
             "biceps": 0.5,
             "deltPosterior": 0.4
-          }
+          },
+          "unidad": "barras"
         },
         {
           "nombre": "Curl martillo",
@@ -112,7 +123,8 @@
             "biceps": 1,
             "antebrazo": 0.6
           },
-          "objetivoProximo": "bajar a 30 kg y recuperar 10-12 reps"
+          "objetivoProximo": "bajar a 30 kg y recuperar 10-12 reps",
+          "unidad": "kg"
         },
         {
           "nombre": "Curl en polea baja",
@@ -123,7 +135,11 @@
           },
           "alternativas": [
             "Curl con barra Z"
-          ]
+          ],
+          "unidad": "barras",
+          "unidadAlternativas": {
+            "Curl con barra Z": "kg"
+          }
         }
       ]
     },
@@ -140,7 +156,8 @@
           "musculos": {
             "cuadriceps": 1,
             "gluteo": 0.5
-          }
+          },
+          "unidad": "kg"
         },
         {
           "nombre": "Extensión de cuádriceps unilateral",
@@ -149,7 +166,8 @@
           "musculos": {
             "cuadriceps": 1
           },
-          "nota": "unilateral porque la máquina topa en 15 barras"
+          "nota": "unilateral porque la máquina topa en 15 barras",
+          "unidad": "barras"
         },
         {
           "nombre": "Talones en prensa",
@@ -158,7 +176,8 @@
           "musculos": {
             "gemelos": 1
           },
-          "nota": "en la prensa: evita apoyar peso sobre los dedos (uña encarnada)"
+          "nota": "en la prensa: evita apoyar peso sobre los dedos (uña encarnada)",
+          "unidad": "kg"
         }
       ]
     },
@@ -175,7 +194,8 @@
             "hombroAnterior": 0.5,
             "triceps": 0.4
           },
-          "objetivoProximo": "42.5 kg"
+          "objetivoProximo": "42.5 kg",
+          "unidad": "kg"
         },
         {
           "nombre": "Remo en T",
@@ -186,7 +206,8 @@
             "dorsal": 0.7,
             "biceps": 0.5,
             "deltPosterior": 0.4
-          }
+          },
+          "unidad": "kg"
         },
         {
           "nombre": "Jalón al pecho",
@@ -199,7 +220,11 @@
           "finisher": "2 series de dominadas",
           "alternativas": [
             "Dominadas"
-          ]
+          ],
+          "unidad": "kg",
+          "unidadAlternativas": {
+            "Dominadas": "pc"
+          }
         },
         {
           "nombre": "Pullover en polea",
@@ -208,7 +233,8 @@
           "musculos": {
             "dorsal": 1,
             "pecho": 0.4
-          }
+          },
+          "unidad": "barras"
         },
         {
           "nombre": "Peck deck",
@@ -217,7 +243,8 @@
           "musculos": {
             "pecho": 1,
             "hombroAnterior": 0.2
-          }
+          },
+          "unidad": "barras"
         }
       ]
     },
@@ -233,7 +260,8 @@
             "hombro": 1,
             "triceps": 0.5
           },
-          "nota": "consolidar 60 kg; reevaluar en 2 semanas"
+          "nota": "consolidar 60 kg; reevaluar en 2 semanas",
+          "unidad": "kg"
         },
         {
           "nombre": "Elevaciones laterales",
@@ -242,7 +270,8 @@
           "musculos": {
             "hombroLateral": 1
           },
-          "nota": "placas de 5 kg: rango 8-12 en vez de 12-15; a 20 kg al lograr 12 limpias"
+          "nota": "placas de 5 kg: rango 8-12 en vez de 12-15; a 20 kg al lograr 12 limpias",
+          "unidad": "kg"
         },
         {
           "nombre": "Peck deck invertido",
@@ -253,7 +282,8 @@
             "espaldaAlta": 0.5
           },
           "nuevo": true,
-          "nota": "corrige el desbalance frente/atrás del hombro"
+          "nota": "corrige el desbalance frente/atrás del hombro",
+          "unidad": "barras"
         },
         {
           "nombre": "Curl predicador",
@@ -261,7 +291,8 @@
           "descansoSeg": 120,
           "musculos": {
             "biceps": 1
-          }
+          },
+          "unidad": "kg"
         },
         {
           "nombre": "Extensión de tríceps",
@@ -270,7 +301,8 @@
           "musculos": {
             "triceps": 1
           },
-          "nota": "sin soltar tensión abajo"
+          "nota": "sin soltar tensión abajo",
+          "unidad": "barras"
         }
       ]
     },
@@ -297,7 +329,11 @@
           "alternativas": [
             "Sentadilla en barra Smith"
           ],
-          "nota": "ALTERNAR semana a semana con la Smith: no ambos el mismo día"
+          "nota": "ALTERNAR semana a semana con la Smith: no ambos el mismo día",
+          "unidad": "kg",
+          "unidadAlternativas": {
+            "Sentadilla en barra Smith": "kg"
+          }
         },
         {
           "nombre": "Hip thrust",
@@ -307,7 +343,8 @@
             "gluteo": 1,
             "isquios": 0.5
           },
-          "nuevo": true
+          "nuevo": true,
+          "unidad": "kg"
         },
         {
           "nombre": "Curl femoral sentado",
@@ -315,7 +352,8 @@
           "descansoSeg": 120,
           "musculos": {
             "isquios": 1
-          }
+          },
+          "unidad": "barras"
         },
         {
           "nombre": "Hiperextensión a 45°",
@@ -328,7 +366,8 @@
           },
           "pesoCorporal": true,
           "progresaPor": "reps",
-          "nota": "SIEMPRE se hizo; faltaba en la app (bug)"
+          "nota": "SIEMPRE se hizo; faltaba en la app (bug)",
+          "unidad": "pc"
         },
         {
           "nombre": "Abductores",
@@ -337,7 +376,8 @@
           "musculos": {
             "abductores": 1,
             "gluteoMedio": 0.7
-          }
+          },
+          "unidad": "barras"
         }
       ]
     }

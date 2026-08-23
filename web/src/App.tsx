@@ -71,6 +71,8 @@ export default function App() {
                   </p>
                 )}
                 <CargasView
+                  cfg={cfg}
+                  editable={!estado.demo}
                   dias={estado.dias}
                   semana={semana}
                   diaInicial={diaDeFecha(new Date()).dia}

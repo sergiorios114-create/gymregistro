@@ -1,16 +1,22 @@
 import { useState } from 'react';
+import { RegistroCarga } from './RegistroCarga';
+import type { AppConfig } from './config';
 import { NUM_SEMANAS, tendencia, ultimoRegistro, type DiaCargas } from './cargas';
 
 interface Props {
+  cfg: AppConfig;
+  editable: boolean;
   dias: DiaCargas[];
   semana: number;
   diaInicial: string;
 }
 
-export function CargasView({ dias, semana, diaInicial }: Props) {
+export function CargasView({ cfg, editable, dias, semana, diaInicial }: Props) {
   const [diaSel, setDiaSel] = useState(() =>
     dias.some((d) => d.dia === diaInicial) ? diaInicial : (dias[0]?.dia ?? '')
   );
+  // Se incrementa al guardar para repintar la grilla de semanas al instante.
+  const [, setTick] = useState(0);
   const dia = dias.find((d) => d.dia === diaSel);
 
   return (
@@ -77,6 +83,24 @@ export function CargasView({ dias, semana, diaInicial }: Props) {
                     <span className="detalle">Sin registros</span>
                   )}
                 </div>
+                {editable && p && !ej.historico && (
+                  <RegistroCarga
+                    key={`${dia.dia}-${ej.nombre}-${semana}`}
+                    cfg={cfg}
+                    dia={dia.dia}
+                    ejercicio={ej.nombre}
+                    objetivo={ej.objetivo || p.objetivo}
+                    unidad={p.unidad}
+                    semana={semana}
+                    actual={ej.sems[semana - 1] ?? null}
+                    ultimo={ultimo?.valor ?? null}
+                    onGuardado={(v) => {
+                      ej.sems[semana - 1] = v;
+                      setTick((t) => t + 1);
+                    }}
+                  />
+                )}
+
                 <div className="semanas">
                   {Array.from({ length: NUM_SEMANAS }, (_, i) => (
                     <div key={i} className={`sem ${i + 1 === semana ? 'actual' : ''}`}>
