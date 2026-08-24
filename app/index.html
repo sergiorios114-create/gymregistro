@@ -204,6 +204,29 @@ nav.tabs button.on{color:var(--accent);background:var(--panel)}
   border:1px solid var(--hair);border-radius:10px;color:var(--ink);
   font-family:"JetBrains Mono",monospace;font-size:12px;padding:13px 12px}
 .cfg:focus{outline:2px solid var(--accent);outline-offset:-1px}
+
+/* ===== bitácora del día ===== */
+.ex.bit{border-style:dashed}
+.ex.bit.hecha{border-style:solid;border-color:var(--accent)}
+.ex.bit .ex-name{color:var(--muted)}
+.ex.bit.hecha .ex-name{color:var(--ink)}
+.bcampo{margin-bottom:14px}
+.blbl{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.bopts{display:flex;gap:6px}
+.bopts button{flex:1;min-height:52px;background:var(--panel);border:1px solid var(--hair);
+  border-radius:11px;color:var(--muted);font-family:inherit;font-size:15px;font-weight:600;
+  cursor:pointer;-webkit-tap-highlight-color:transparent}
+.bopts button:active{transform:scale(.96)}
+.bopts button.on{background:var(--accent);border-color:var(--accent);color:#121212}
+.bopts.dos button{font-size:13px}
+.bopts.dos button.mal.on{background:var(--warn);border-color:var(--warn)}
+.bopts.tres button{font-size:12px;letter-spacing:.02em}
+.bnotas{width:100%;box-sizing:border-box;min-height:82px;background:var(--panel);
+  border:1px solid var(--hair);border-radius:11px;color:var(--ink);font-family:inherit;
+  font-size:14px;padding:13px;resize:vertical;line-height:1.5}
+.bnotas:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.bskip{margin-top:4px}
 </style>
 </head>
 <body>
@@ -339,6 +362,7 @@ let sesiones = ld('ent_sesiones',{});   // { '2026-07-25': { 'press-inclinado':{
 let unidades = ld('ent_unidades',{});   // { 'press-inclinado':'kg' }
 let abierto  = null;
 let editando = null;                    // { id, i } serie que se está corrigiendo
+let bitacora = ld('ent_bitacora',{});   // { '2026-08-24': {energia,sueno,hombro,peso,fase,notas,noEntrene} }
 
 const $=s=>document.querySelector(s);
 const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
@@ -404,9 +428,91 @@ function render(){
       </button>
       <div class="panel"><div class="inner"><div class="body">${abierto===idx?cuerpo(e,f,u):''}</div></div></div>
     </div>`;
-  }).join('');
+  }).join('') + tarjetaBitacora(f);
 
   renderHist();
+}
+
+/* ================= BITÁCORA DEL DÍA =================
+   Vive al final de la lista del día, no en una pestaña: así aparece justo
+   cuando terminas de entrenar, sin tener que acordarte de ir a buscarla. */
+const ENERGIA=['1','2','3','4','5'];
+const FASES=[['deficit','Déficit'],['mantencion','Mantención'],['superavit','Superávit']];
+
+function bitDe(f){ return bitacora[f] || {}; }
+function faseUltima(){
+  const fs=Object.keys(bitacora).sort().reverse();
+  for(const f of fs) if(bitacora[f].fase) return bitacora[f].fase;
+  return '';
+}
+function tarjetaBitacora(f){
+  const b=bitDe(f);
+  const hecha = !!(b.energia || b.noEntrene);
+  const ab = abierto==='bit';
+  const resumen = b.noEntrene
+    ? 'No entrené · ' + (b.motivo||'sin motivo')
+    : hecha
+      ? [b.energia?'energía '+b.energia:null, b.sueno?b.sueno+' h':null,
+         b.hombro?('hombro '+b.hombro):null, b.peso?b.peso+' kg':null]
+         .filter(Boolean).join('  ·  ')
+      : '30 segundos: energía, sueño, hombro, peso';
+  return `<div class="ex bit${hecha?' hecha':''}${ab?' open':''}" data-i="bit">
+    <button class="ex-head"><span class="ex-mark">✓</span>
+      <span class="ex-g"><span class="ex-name">Cómo estuvo el día</span>
+      <span class="ex-meta">${resumen}</span></span>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="panel"><div class="inner"><div class="body">${ab?cuerpoBitacora(f,b):''}</div></div></div>
+  </div>`;
+}
+function cuerpoBitacora(f,b){
+  if(b.noEntrene){
+    return `<div class="last"><span class="tag">Día no entrenado</span>
+      <b>${b.motivo||'sin motivo'}</b></div>
+      <textarea class="bnotas" id="b-notas" placeholder="Notas del día…">${b.notas||''}</textarea>
+      <button class="save" data-bsave="1" style="margin-top:12px">Guardar</button>
+      <button class="save sec bskip" data-bvolver="1">Sí entrené, volver</button>`;
+  }
+  const fase = b.fase || faseUltima();
+  const opt=(v,cur,attr,txt,cls)=>`<button data-${attr}="${v}" class="${String(cur)===String(v)?'on':''}${cls?' '+cls:''}">${txt}</button>`;
+  return `
+    <div class="bcampo">
+      <div class="blbl">Energía</div>
+      <div class="bopts">${ENERGIA.map(v=>opt(v,b.energia,'ben',v)).join('')}</div>
+    </div>
+    <div class="bcampo">
+      <div class="blbl">Sueño · horas</div>
+      <div class="step-row">
+        <button data-bst="sueno|-">−</button>
+        <input class="val mono" id="b-sueno" type="number" inputmode="decimal" step="0.5" min="0" value="${b.sueno??7}">
+        <button data-bst="sueno|+">+</button>
+      </div>
+    </div>
+    <div class="bcampo">
+      <div class="blbl">Hombro</div>
+      <div class="bopts dos">
+        ${opt('ok',b.hombro,'bho','Bien')}
+        ${opt('molesta',b.hombro,'bho','Molesta','mal')}
+      </div>
+    </div>
+    <div class="bcampo">
+      <div class="blbl">Peso corporal · kg</div>
+      <div class="step-row">
+        <button data-bst="peso|-">−</button>
+        <input class="val mono" id="b-peso" type="number" inputmode="decimal" step="0.1" min="0" value="${b.peso??''}" placeholder="—">
+        <button data-bst="peso|+">+</button>
+      </div>
+    </div>
+    <div class="bcampo">
+      <div class="blbl">Fase de dieta</div>
+      <div class="bopts tres">${FASES.map(([v,t])=>opt(v,fase,'bfa',t)).join('')}</div>
+    </div>
+    <div class="bcampo">
+      <div class="blbl">Notas</div>
+      <textarea class="bnotas" id="b-notas" placeholder="Cómo te sentiste, molestias, lo que sea…">${b.notas||''}</textarea>
+    </div>
+    <button class="save" data-bsave="1">Guardar el día</button>
+    <button class="save sec bskip" data-bskip="1">Hoy no entrené</button>`;
 }
 
 function cuerpo(e,f,u){
@@ -632,9 +738,10 @@ function topSet(series, u){
   return t.p+'x'+t.r;
 }
 async function enviar(item){
+  const {_bit, ...payload} = item;
   const res = await fetch(CFG.url, {method:'POST', redirect:'follow',
     headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body: JSON.stringify({token:CFG.token, action:'saveCarga', payload:item})});
+    body: JSON.stringify({token:CFG.token, action:_bit?'saveBitacora':'saveCarga', payload})});
   const b = await res.json();
   if(!b.ok) throw new Error(b.error||'error del API');
 }
@@ -660,6 +767,23 @@ function sincronizar(e, f){
   avisoSync('sincronizando…');
   vaciarCola();
 }
+/** Manda la bitácora del día a Sheets (una fila por día). */
+function sincronizarBitacora(f){
+  if(!CFG.url || !CFG.token) return;
+  const b = bitDe(f); if(!b || (!b.energia && !b.noEntrene)) return;
+  const P = PLAN[new Date(f+'T00:00').getDay()];
+  const nEj = Object.values(sesiones[f]||{}).filter(x=>x.series?.length).length;
+  cola = cola.filter(x => !(x._bit && x.fecha===f));
+  cola.push({_bit:true, fecha:f, dia:P.n,
+    sesion: b.noEntrene ? ('NO ENTRENÉ · '+(b.motivo||'')) : (P.f + (nEj?' · '+nEj+' ejercicios':'')),
+    energia: b.energia?Number(b.energia):null, sueno: b.sueno??null,
+    hombro: b.hombro||'', peso: b.peso??null,
+    fase: (FASES.find(x=>x[0]===b.fase)||[null,''])[1], notas: b.notas||''});
+  sv('ent_cola', cola);
+  avisoSync('sincronizando…');
+  vaciarCola();
+}
+
 addEventListener('online', vaciarCola);
 
 /* --- controles del temporizador --- */
@@ -694,7 +818,10 @@ document.addEventListener('click',ev=>{
 
   const head = t.closest('.ex-head');
   if(head){
-    const i=+head.closest('.ex').dataset.i;
+    const raw = head.closest('.ex').dataset.i;
+    if(raw==='bit'){ abierto = abierto==='bit' ? null : 'bit'; editando=null; render();
+      setTimeout(()=>{const el=document.querySelector('.ex.open'); if(el) scrollTo({top:el.offsetTop-14,behavior:'smooth'});},340); return; }
+    const i=+raw;
     const abrir = abierto!==i;
     abierto = abrir?i:null;
     editando = null;
@@ -719,6 +846,61 @@ document.addEventListener('click',ev=>{
     el.value = Math.max(0, Math.round(v*100)/100);
     if(navigator.vibrate) navigator.vibrate(8);
     return;
+  }
+
+
+  /* --- bitácora --- */
+  const ben=t.closest('[data-ben]');
+  if(ben){ const f=ymd(verFecha); bitacora[f]={...bitDe(f), energia:ben.dataset.ben};
+    sv('ent_bitacora',bitacora); if(navigator.vibrate)navigator.vibrate(8);
+    const y=scrollY; render(); scrollTo(0,y); return; }
+
+  const bho=t.closest('[data-bho]');
+  if(bho){ const f=ymd(verFecha); bitacora[f]={...bitDe(f), hombro:bho.dataset.bho};
+    sv('ent_bitacora',bitacora); if(navigator.vibrate)navigator.vibrate(8);
+    const y=scrollY; render(); scrollTo(0,y); return; }
+
+  const bfa=t.closest('[data-bfa]');
+  if(bfa){ const f=ymd(verFecha); bitacora[f]={...bitDe(f), fase:bfa.dataset.bfa};
+    sv('ent_bitacora',bitacora); if(navigator.vibrate)navigator.vibrate(8);
+    const y=scrollY; render(); scrollTo(0,y); return; }
+
+  const bst=t.closest('[data-bst]');
+  if(bst){
+    const [campo,sig]=bst.dataset.bst.split('|');
+    const el=$(campo==='sueno'?'#b-sueno':'#b-peso');
+    const inc=campo==='sueno'?0.5:0.1;
+    const v=(parseFloat(el.value)||(campo==='sueno'?7:65)) + (sig==='+'?inc:-inc);
+    el.value=Math.max(0,Math.round(v*10)/10);
+    if(navigator.vibrate)navigator.vibrate(8);
+    return;
+  }
+
+  const bskip=t.closest('[data-bskip]');
+  if(bskip){
+    const motivo=prompt('¿Por qué no entrenaste?\n(enfermedad, lesión, viaje, descanso…)','');
+    if(motivo===null) return;
+    const f=ymd(verFecha);
+    bitacora[f]={...bitDe(f), noEntrene:true, motivo:motivo.trim()||'sin motivo'};
+    sv('ent_bitacora',bitacora); render(); return;
+  }
+  const bvol=t.closest('[data-bvolver]');
+  if(bvol){ const f=ymd(verFecha); const b={...bitDe(f)}; delete b.noEntrene; delete b.motivo;
+    bitacora[f]=b; sv('ent_bitacora',bitacora); render(); return; }
+
+  const bsave=t.closest('[data-bsave]');
+  if(bsave){
+    const f=ymd(verFecha);
+    const b={...bitDe(f)};
+    const su=$('#b-sueno'), pe=$('#b-peso'), no=$('#b-notas');
+    if(su) b.sueno = parseFloat(su.value)||null;
+    if(pe) b.peso  = parseFloat(pe.value)||null;
+    if(no) b.notas = no.value.trim();
+    if(!b.fase) b.fase = faseUltima();
+    bitacora[f]=b; sv('ent_bitacora',bitacora);
+    if(navigator.vibrate) navigator.vibrate([12,40,12]);
+    sincronizarBitacora(f);
+    abierto=null; render(); return;
   }
 
   const add = t.closest('[data-add]');

@@ -1,6 +1,6 @@
 /* Service worker — permite usar la app sin internet.
    Sube la versión cuando cambies index.html para forzar la actualización. */
-const V = 'entreno-v2';
+const V = 'entreno-v3';
 const ARCHIVOS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
